@@ -43,8 +43,9 @@ ggplot() +
 # - Data preparation ----
 # moving away from Star Wars, and into Animal Rescues!
 install.packages("tidytuesdayR")
-tidytuesdayR::tt_load('2021-06-29')
-animal_rescues_raw <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-06-29/animal_rescues.csv')
+tuesdata <- tidytuesdayR::tt_load('2021-06-29')
+animal_rescues_raw <- tuesdata$animal_rescues
+tuesdata
 
 # dataviz: number of animals rescues in the last couple of years
 # prepare animal_rescues for dataviz
@@ -231,8 +232,14 @@ ggsave(
   width = 8, height = 6, dpi = 500
 )
 
+# for our plot specifically
+dir.create("graphs")
 
-#dir.create("graphs")
+ggsave(
+  filename = "graphs/animal_rescues.png", plot = last_plot(),
+  device = "png", units = "in",
+  width = 12, height = 6, dpi = 500
+)
 
 # - Exercises ----
 # EXERCISE 1
