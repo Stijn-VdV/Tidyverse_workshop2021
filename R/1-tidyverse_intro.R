@@ -13,6 +13,7 @@ tidyverse::tidyverse_update()
   # masked functions
 filter
 stats::filter
+dplyr::filter
 
 # - Tibbles ----
 # set seed for reproducibility
