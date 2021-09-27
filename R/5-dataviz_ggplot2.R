@@ -212,6 +212,27 @@ animal_rescues %>%
     strip.background.x = element_rect(colour = NA, fill = "grey95")
   )
 
+# - Saving a plot ----
+some_plot <- some_data %>%
+  ggplot() +
+  geom_point()
+
+# save plot
+ggsave(
+  filename = "PATH/my_plot.png", plot = some_plot,
+  device = "png", units = "in", #inches
+  width = 8, height = 6, dpi = 500
+)
+
+# save plot (in case it can be retrieved from your session)
+ggsave(
+  filename = "PATH/my_plot.png", plot = last_plot(),
+  device = "png", units = "in", #inches
+  width = 8, height = 6, dpi = 500
+)
+
+
+#dir.create("graphs")
 
 # - Exercises ----
 # EXERCISE 1
