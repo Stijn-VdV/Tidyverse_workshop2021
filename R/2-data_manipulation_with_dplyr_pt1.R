@@ -284,7 +284,7 @@ clone_wars %>%
 #             You can start with the code provided below
 
 storms %>%
-  filter(!str_detect(name, "AL|Al2")) %>%
+  filter(!str_detect(name, "AL|Al2"))
 
 
 
