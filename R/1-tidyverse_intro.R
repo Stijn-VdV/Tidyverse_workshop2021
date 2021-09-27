@@ -39,13 +39,14 @@ sum(24, 9)
 
 # magrittr
 24 %>% sum(9)
-24 %>% sum(., 9) # . as placeholder
+24 %>% sum(9, .) # . as placeholder
 
 # base R
 24 |> sum(9)
 
-# compare approaches
+# show data
 glimpse(mtcars)
+str(mtcars)
 head(mtcars)
 
   # mtcars #1
