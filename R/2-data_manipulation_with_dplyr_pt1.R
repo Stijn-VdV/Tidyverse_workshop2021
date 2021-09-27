@@ -2,7 +2,7 @@
 ######## Tidyverse: Data Wrangling 101 ########
 ######## Data manipulation: dplyr pt.I ########
 ########_______________________________########
-rm(list = ls())
+#rm(list = ls())
 # dataset: starwars (included with dplyr)
 ?starwars
 glimpse(starwars)
