@@ -10,6 +10,8 @@ head(starwars)
 
 # - select() to select columns ----
 # select columns by name #1
+select(starwars, name, height, mass, homeworld, species)
+
 starwars %>%
   select(name, height, mass, homeworld, species)
 
@@ -19,6 +21,7 @@ starwars %>%
          -sex, -gender, -films, -vehicles, -starships)
 
 # select columns by name #2
+colnames(starwars)
 starwars %>%
   select(name:mass, homeworld, species)
 
@@ -38,6 +41,9 @@ starwars <- select(starwars, -c(films, vehicles, starships))
 
 # - filter() to filter rows using TRUE/FALSE statements ----
 # characters with a gold skin colour
+1 == 1
+1 == 2
+
 starwars %>%
   filter(skin_color == "gold")
 
@@ -48,7 +54,7 @@ starwars %>%
 starwars %>%
   filter(gender == "masculine",
          skin_color != "gold",
-         height >= 176.5)
+         height >= 176.5) %>% view()
 
 # characters with eye_color == "blue" OR eye_color == "red"
 starwars %>%
@@ -57,6 +63,9 @@ starwars %>%
 # characters NOT with eye_color == "blue" OR eye_color == "red
 starwars %>%
   filter(!eye_color %in% c("blue", "red"))
+
+starwars %>%
+  filter(str_detect(eye_color, pattern = "blu"))
 
 # see `?base::Logic` for an overview of logic operators
   # NOT: !x
@@ -157,9 +166,9 @@ starwars %>%
 
 # average height and weight PER SPECIES #2
 starwars %>%
+  drop_na(species) %>%
   group_by(species) %>%
   filter(n() >= 3) %>%
-  drop_na(species) %>%
   summarize(average_height = mean(height, na.rm = TRUE),
             average_weight = mean(mass, na.rm = TRUE),
             individuals = n()) %>%
@@ -255,7 +264,8 @@ clone_wars %>%
 #                   - have blond or no hair colour ("none")
 #                   - are of the Human species
 #                   - not born on planets Bespin, Coruscant or Haruun Kal
-
+starwars %>%
+  select(where(is.character), height)
 
 # EXERCISE 2: Use the `starwars` dataset to calculate the average and stdev of
 #             weight per sex.

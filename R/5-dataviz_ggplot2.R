@@ -56,7 +56,7 @@ animal_rescues <- animal_rescues_raw %>%
     "year" = cal_year,
     "cost" = incident_notional_cost
   ) %>%
-    # keep only data for the years 2015 to 2021
+    # keep only data for the years 2016 to 2021
   filter(year >= 2016) %>%
     # keep only distinct animal names
   filter(!str_detect(animal, "Unknown")) %>%
@@ -90,6 +90,11 @@ ggplot() +
   geom_bar(data = animal_rescues, mapping = aes(x = animal)) +
   coord_flip() +
   facet_wrap(~year)
+
+ggplot() +
+  geom_bar(data = animal_rescues, mapping = aes(x = animal)) +
+  coord_flip() +
+  facet_grid(rows = vars(animal), cols = vars(year))
 
 # scales #1
 ggplot() +
