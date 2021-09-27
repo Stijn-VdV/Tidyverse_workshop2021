@@ -428,7 +428,7 @@ To find out more about [vroom](https://vroom.r-lib.org/) and [data.table](https:
 
 Once you've loaded your data into R, it's time to start tinkering! A package that aims to make handling and manipulating data easier and more efficient is `dplyr` (pronounced d-ply-r), which you'll use most often when it comes to data manipulation. It presents itself as a *grammar of data manipulation*, providing a couple of functions to solve most common data manipulation challenges, also referred to as **verbs**: `select()`, `filter()`, `mutate()`, `arrange()`, etc.
 
-These so-called verbs can be used together harmoniously, aiming to make data wranlging a much smoother and readable experience. For your reference, I will list the functions used in [**5.10 Overview**], each accompanied by a short description. Worked out examples will be provided in the next sections. Similar examples can be found in the package's vignette by using `vignette("dplyr")` in R. For sake of completion, I will provide some base R alternatives, as well ([dplyr\<-\>base R](https://dplyr.tidyverse.org/articles/base.html)).
+These so-called verbs can be used together harmoniously, aiming to make data wrangling a much smoother and readable experience. For your reference, I will list the functions used in [5.10 Overview] each accompanied by a short description. Worked out examples will be provided in the next sections. Similar examples can be found in the package's vignette by using `vignette("dplyr")` in R. For sake of completion, I will provide some base R alternatives, as well ([dplyr\<-\>base R](https://dplyr.tidyverse.org/articles/base.html)).
 
 Using one of the datasets included with `dplyr`, we will explore the world of [Star Wars](https://en.wikipedia.org/wiki/Star_Wars). As you can see below, we have 14 variables (columns) with 87 observations (rows), so we have a lot to work with! The `glimpse()` function is included in the `dplyr` package (but is actually exported from `tibble`, which, in turn, exported it from `pillar` - phew!), and gives us a 'glimpse' of the dataset.
 
@@ -905,14 +905,14 @@ All in all, `left_join()` is likely to be your bread and butter for merging data
 
 Joining can also be very beneficial to filter datasets. For instance, you may be dealing with one dataset containing measurement data and IDs, while another dataset contains IDs and geographical coordinates. However, you may only want to keep measurement data for which you have matching coordinates (and omit data that lacks this metadata). With many possible use cases, we simply cannot pass up on showing `semi_join()` and `anti_join()`. Mind you that, compared to mutating joins, these functions *do not* add variables from one dataset to another. They simply retain (or omit) columns in one dataframe based on matches in the other.
 
-Imagine we want to retain all rows in `publishers` for which we have matching information in `movies`. This returns the original `publishers` object, but without *The Matrix* and *The Notebook* (as they are not part of `movies`).
+Imagine we want to retain all rows in `movies` for which we have matching information in `publishers`. This returns the original `movies`object, but without *The Matrix* and *The Notebook* (as they are not part of `publishers`).
 
 ```{r semi_join, collapse = TRUE}
 movies %>% semi_join(publishers)
 
 ```
 
-In other words, `semi_join()` keeps all rows in the first dataset (`publishers`) that *have* matching rows (based on the common variable `movie`) in the second dataset (`movies`), but no columns are added (e.g. `publishers$studio`). Conversely, `anti_join()` does the opposite.
+In other words, `semi_join()` keeps all rows in the first dataset (`movies`) that *have* matching rows (based on the common variable `movie`) in the second dataset (`publishers`), but no columns are added (e.g. `publishers$studio`). Conversely, `anti_join()` does the opposite.
 
 ```{r anti_join, collapse = TRUE}
 movies %>% anti_join(publishers)
@@ -1190,13 +1190,11 @@ starwars %>%
 Oof, a wild error message appeared! Even though we defined *how* we wanted to present our data (point shapes; scatter plot), we forgot to define *what* we want to visualize. To do so, we need to tell `ggplot` we are **mapping** `height` to the x-axis, and `mass` to the y-axis. This can be done using `aes` (short for 'aesthetics'). Such **aesthetic mappings** describe how variables (in your data) are mapped to certain visual properties (aesthetics) of the geoms you've selected.
 
 ```{r ggplot3, collapse = TRUE, dpi = 300}
-plot1 <- starwars %>% 
+starwars %>% 
   ggplot() +
   geom_point(
     mapping = aes(x = height, y = mass)
   )
-
-plot1
 
 ```
 
