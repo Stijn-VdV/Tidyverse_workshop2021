@@ -1126,7 +1126,7 @@ my_data
 
 ```
 
-Let's try and pivot this to a long table using `pivot_longer()`.
+Let's try and pivot this to a wide table using `pivot_wider()`.
 
 ```{r pivot_problems2, collapse = TRUE}
 my_data %>% 
